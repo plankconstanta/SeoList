@@ -1,5 +1,5 @@
 <?php
-
+namespace SeoList;
 interface SeoListInterface {
 /**
 * @param string $url

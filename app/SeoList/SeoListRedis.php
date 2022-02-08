@@ -1,4 +1,5 @@
 <?php
+namespace SeoList;
 class SeoListRedis implements SeoListInterface {
     private $store = null;
 

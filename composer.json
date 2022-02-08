@@ -3,8 +3,8 @@
         "phpunit/phpunit": "^9.5"
     },
     "autoload": {
-        "classmap": [
-            "module"
-        ]
+        "psr-4": {
+            "SeoList\\":"app/SeoList"
+        }
     }
 }

@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-//use module\SeoList;
+use SeoList\SeoListDb;
+use SeoList\SeoListHelper;
 
 echo SeoListHelper::clearUrl('test').PHP_EOL;
 echo SeoListDb::hash('test').PHP_EOL;

@@ -1,4 +1,6 @@
 <?php
+namespace SeoList;
+
 class SeoListHelper {
     const LIMIT_VISITS = 100;
 

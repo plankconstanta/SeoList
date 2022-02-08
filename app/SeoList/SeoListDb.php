@@ -1,4 +1,5 @@
 <?php
+namespace SeoList;
 
 class SeoListDb implements SeoListInterface {
 
