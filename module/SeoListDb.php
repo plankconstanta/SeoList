@@ -1,0 +1,66 @@
+<?php
+
+class SeoListDb implements SeoListInterface {
+
+    /**
+     * @param string $url
+     * @return string
+     */
+    public static function hash($url) {
+        $hash = crc32($url);
+        return $hash;
+    }
+
+    public function __construct()
+    {
+
+    }
+
+    public function set($url) {
+        $hash = self::hash($url);
+        $item = new SeoList();
+        $item->setUrl($url);
+        $item->setHash($hash);
+        $item->save();
+        return true;
+    }
+
+    public function delete($url) {
+        return false;
+    }
+
+    public function has($url) {
+        $item = $this->getByUrl($url);
+        return $item ? true : false;
+    }
+
+    private function getByUrl($url) {
+        $hash = self::hash($url);
+        $c = new Criteria();
+        $c->add(SeoListPeer::HASH, $hash);
+        $c->add(SeoListPeer::URL, $url);
+        $item = SeoListPeer::doSelectOne($c);
+        return $item;
+    }
+
+    public function count() {
+        $c = new Criteria();
+        $cnt = SeoListPeer::doCount($c);
+        return $cnt;
+    }
+
+    public function inc($url) {
+        $item = $this->getByUrl($url);
+        if (empty($item)) {
+            return null;
+        }
+
+        $sql = 'UPDATE `seo_list` set `cnt` = `cnt` + 1 WHERE `id` = ' . $item->getId();
+        $con = Propel::getConnection();
+        $con->executeQuery($sql);
+
+        $item = SeoListPeer::retrieveByPk($item->getId());
+        return $item ? $item->getCnt() : 0;
+    }
+}
+?>
