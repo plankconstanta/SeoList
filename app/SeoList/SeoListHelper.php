@@ -6,7 +6,7 @@ class SeoListHelper {
 
     /**
      * create list
-     * @return SeoListDb|SeoListRedis
+     * @return SeoListInterface
      */
     public static function getList() {
         if ($r = get_rediska_instance()) {
@@ -25,6 +25,16 @@ class SeoListHelper {
         $url = trim(str_replace(array('https://', 'http://', 'www.'), '', $url));
         $url = explode("?", $url)[0];
         return $url;
+    }
+
+    public static function countUrl(string $url, SeoListInterface $seolist) {
+        if ($seolist->has($url)) {
+            $val = $seolist->inc($url);
+        } else {
+            $seolist->set($url);
+            $val = $seolist->int($url);
+        }
+        return $val;
     }
 }
 ?>

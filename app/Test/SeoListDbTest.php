@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use SeoList\SeolistDb;
+use SeoList\SeoListDb;
 
 class SeoListDbTest extends TestCase
 {
